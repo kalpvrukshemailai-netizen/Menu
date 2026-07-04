@@ -21,6 +21,8 @@ function FoodModel({ url }) {
 function MobileMenuCard({ item, index }) {
   const { addToCart } = useCart();
   const cardRef = useRef(null);
+  const imgWrapRef = useRef(null);
+  const imgRef = useRef(null);
   const [added, setAdded] = useState(false);
 
   useEffect(() => {
@@ -51,6 +53,82 @@ function MobileMenuCard({ item, index }) {
     return () => obs.disconnect();
   }, [index]);
 
+  useEffect(() => {
+    // Add continuous floating animation & pointer drag interaction for 2D image
+    const wrap = imgWrapRef.current;
+    const target = imgRef.current;
+    if (!wrap || !target) return;
+
+    const levitationAnim = gsap.to(target, {
+      y: -15,
+      rotateZ: 2,
+      duration: 2.5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+    });
+
+    let isDragging = false;
+
+    const handlePointerDown = (e) => {
+      isDragging = true;
+      levitationAnim.pause();
+      target.style.transition = 'none'; // Prevent CSS transition fighting GSAP
+      if (wrap.hasPointerCapture(e.pointerId)) {
+        wrap.releasePointerCapture(e.pointerId);
+      }
+      wrap.setPointerCapture(e.pointerId);
+    };
+    
+    const handlePointerMove = (e) => {
+      if (!isDragging) return;
+      const rect = wrap.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+      
+      const cx = Math.max(-0.7, Math.min(0.7, nx));
+      const cy = Math.max(-0.7, Math.min(0.7, ny));
+
+      gsap.to(target, {
+        rotationY: -15 + cx * 60,
+        rotationX: 15 + -cy * 60,
+        duration: 0.1,
+        ease: 'none',
+        overwrite: 'auto',
+      });
+    };
+    
+    const handlePointerUp = (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      target.style.transition = ''; // Restore CSS transition
+      if (wrap.hasPointerCapture(e.pointerId)) {
+        wrap.releasePointerCapture(e.pointerId);
+      }
+      gsap.to(target, {
+        rotationY: -15,
+        rotationX: 15,
+        duration: 0.8,
+        ease: 'power3.out',
+        onComplete: () => levitationAnim.play(),
+      });
+    };
+
+    wrap.addEventListener('pointerdown', handlePointerDown, { passive: true });
+    wrap.addEventListener('pointermove', handlePointerMove, { passive: true });
+    wrap.addEventListener('pointerup', handlePointerUp, { passive: true });
+    wrap.addEventListener('pointercancel', handlePointerUp, { passive: true });
+
+    return () => {
+      wrap.removeEventListener('pointerdown', handlePointerDown);
+      wrap.removeEventListener('pointermove', handlePointerMove);
+      wrap.removeEventListener('pointerup', handlePointerUp);
+      wrap.removeEventListener('pointercancel', handlePointerUp);
+      levitationAnim.kill();
+      gsap.killTweensOf(target);
+    };
+  }, [item.img]);
+
   const handleAdd = () => {
     addToCart(item);
     setAdded(true);
@@ -60,7 +138,7 @@ function MobileMenuCard({ item, index }) {
   return (
     <div ref={cardRef} className="mc-card" style={{ opacity: 0 }}>
       {/* Image strip */}
-      <div className="mc-img-wrap">
+      <div className="mc-img-wrap" ref={imgWrapRef} style={{ touchAction: 'none' }}>
         {item.modelUrl ? (
           <Canvas
             camera={{ position: [0, 1, 3], fov: 45 }}
@@ -76,7 +154,7 @@ function MobileMenuCard({ item, index }) {
             </Suspense>
           </Canvas>
         ) : item.img ? (
-          <img src={item.img} alt={item.name} className="mc-img" loading="lazy" />
+          <img ref={imgRef} src={item.img} alt={item.name} className="mc-img" loading="lazy" draggable={false} />
         ) : (
           <div className="mc-emoji">{item.emoji}</div>
         )}
