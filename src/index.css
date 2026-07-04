@@ -23,8 +23,8 @@
   --shadow-img:  rgba(0,0,0,0.6);
   --shadow-card: rgba(0,0,0,0.6);
   
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-body:    'Jost', system-ui, sans-serif;
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'Outfit', sans-serif;
 
   --nav-h:         70px;
   --page-max:      1400px;
@@ -52,7 +52,7 @@
   --shadow-img:  rgba(0,0,0,0.25);
   --shadow-card: rgba(0,0,0,0.06);
   
-  --font-display: 'Inter', system-ui, sans-serif;
+  --font-display: 'Syne', sans-serif;
 }
 
 [data-theme="neon"] {
@@ -146,15 +146,21 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   color: var(--text);
   letter-spacing: 0.05em;
   margin-bottom: -4px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
   transition: color 0.3s ease;
+  white-space: nowrap;
 }
 .restaurant-name em { font-style: italic; color: var(--primary); }
 [data-theme="light"] .restaurant-name em { font-style: normal; font-weight: 700; }
 [data-theme="neon"] .restaurant-name em { font-style: normal; color: var(--primary-2); text-shadow: 0 0 10px var(--primary-2); }
 [data-theme="neon"] .restaurant-name { text-shadow: 0 0 8px rgba(255,255,255,0.3); }
+
+.restaurant-tagline {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
 
 /* Center: Nav Links */
 .header-nav { display: none; }
@@ -916,6 +922,11 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   .reserve-btn { display: none; }
   .mobile-only { display: block; }
   .desktop-only { display: none; }
+  
+  .restaurant-name { font-size: 20px; }
+  .restaurant-tagline { font-size: 9px; letter-spacing: 0.1em; }
+  .header-actions { gap: 8px; }
+  .header-logo { gap: 10px; }
 
   /* Hide the desktop menu-explorer entirely on mobile */
   /* menu-explorer is hidden on mobile only when mc-section (card layout) is used instead */

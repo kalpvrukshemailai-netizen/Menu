@@ -6,8 +6,8 @@ import { CartProvider, useCart } from './context/CartContext';
 import { ShoppingBag, ChevronDown, Menu, Calendar } from 'lucide-react';
 
 const THEMES = [
-  { id: 'dark', label: 'Dark Luxury', name: 'Maison', em: 'Élise', tagline: 'Fine Dining · Est. 2014' },
-  { id: 'light', label: 'Modern Minimalist', name: 'Bistro', em: 'Blanc', tagline: 'Organic Cafe · Fresh Daily' },
+  { id: 'dark', label: 'Dark Luxury', name: 'beprompter', em: '-cafe', tagline: 'Fine Dining · Est. 2014' },
+  { id: 'light', label: 'Light Classic', name: 'beprompter', em: '-cafe', tagline: 'Artisanal Kitchen · Fresh Daily' },
   { id: 'neon', label: 'Neon Cyberpunk', name: 'Neon', em: 'Bites', tagline: 'Cyber Lounge · 2077' },
 ];
 
@@ -91,21 +91,12 @@ function Header({ currentView, setCurrentView, currentTheme, setCurrentTheme, mo
         <div className="header-actions">
           <button className="cta-btn">Book a Table</button>
           
-          {/* Mobile specific actions */}
-          <button className="mobile-icon-btn mobile-only">
-            <Calendar size={22} />
-          </button>
-
           <button 
             className={`header-cart-btn ${totalItems > 0 ? 'has-items' : ''}`}
             onClick={() => setCurrentView(currentView === 'checkout' ? 'landing' : 'checkout')}
           >
             <ShoppingBag size={22} />
             {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
-          </button>
-          
-          <button className="mobile-icon-btn mobile-only">
-            <Menu size={24} />
           </button>
         </div>
       </div>
