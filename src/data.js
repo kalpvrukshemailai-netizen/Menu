@@ -1,0 +1,141 @@
+export const CATEGORIES = [
+  { id: 'starters', label: 'Starters' },
+  { id: 'mains', label: 'Main Course' },
+  { id: 'desserts', label: 'Desserts' },
+];
+
+export const MENU_DATA = [
+  // STARTERS
+  {
+    id: 's1',
+    category: 'starters',
+    name: 'Gourmet Burger',
+    desc: 'Our signature double wagyu beef patty with truffle mayo, melted cheddar, and crispy onions. Served in a brioche bun.',
+    price: 320,
+    badge: 'NEW 3D',
+    img: '/assets/images/menu/veg-spring-roll.png', // Fallback
+    modelUrl: '/models/burger.glb', // Local GLB file
+  },
+  {
+    id: 's2',
+    category: 'starters',
+    name: 'Cheese Garlic Bread',
+    desc: 'Toasted artisan bread with garlic butter and a three-cheese melt. Finished with fresh herbs and a drizzle of olive oil.',
+    price: 220,
+    img: '/assets/images/menu/cheese-garlic-bread.png',
+  },
+  {
+    id: 's3',
+    category: 'starters',
+    name: 'Crispy Corn',
+    desc: 'Golden batter-fried baby corn tossed in butter, cracked pepper and herbs. Light, crunchy and utterly addictive.',
+    price: 240,
+    badge: 'CHEF\'S CHOICE',
+    img: '/assets/images/menu/crispy-corn.png',
+  },
+  {
+    id: 's4',
+    category: 'starters',
+    name: 'Hara Bhara Kebab',
+    desc: 'Smooth-grilled patties of spinach, green peas and potato. Spiced with garam masala, served with raw mango dip.',
+    price: 310,
+    badge: 'HERITAGE',
+    img: '/assets/images/menu/hara-bhara-kebab.png',
+  },
+  {
+    id: 's5',
+    category: 'starters',
+    name: 'Paneer Tikka',
+    desc: 'Tandoor-charred cottage cheese marinated overnight in saffron yoghurt and ajwain. Served with mint-coriander chutney.',
+    price: 420,
+    badge: 'SIGNATURE',
+    img: '/assets/images/menu/paneer-tikka.png',
+  },
+
+  // MAINS
+  {
+    id: 'm1',
+    category: 'mains',
+    name: 'Dal Makhani',
+    desc: 'Black lentils simmered for 24 hours with fresh tomato purée, finished with churned butter and a touch of cream.',
+    price: 380,
+    img: '/assets/images/menu/dal-makhani.png',
+  },
+  {
+    id: 'm2',
+    category: 'mains',
+    name: 'Paneer Butter Masala',
+    desc: 'Soft paneer cubes in a rich, velvety tomato and cashew gravy, perfumed with dried fenugreek leaves.',
+    price: 450,
+    img: '/assets/images/menu/paneer-butter-masala.png',
+  },
+  {
+    id: 'm3',
+    category: 'mains',
+    name: 'Kadai Paneer',
+    desc: 'Wok-tossed paneer with crunchy bell peppers and onions in a robust, freshly ground coriander-chili masala.',
+    price: 440,
+    img: '/assets/images/menu/kadai-paneer.png',
+  },
+  {
+    id: 'm4',
+    category: 'mains',
+    name: 'Malai Kofta',
+    desc: 'Melt-in-mouth dumplings of paneer and potato stuffed with dry fruits, served in a mild, sweet-savoury cashew sauce.',
+    price: 460,
+    badge: 'SIGNATURE',
+    img: '/assets/images/menu/malai-kofta.png',
+  },
+  {
+    id: 'm5',
+    category: 'mains',
+    name: 'Mix Veg',
+    desc: 'A vibrant medley of seasonal garden vegetables lightly spiced and sautéed home-style.',
+    price: 360,
+    img: '/assets/images/menu/mix-veg.png',
+  },
+
+  // DESSERTS
+  {
+    id: 'd1',
+    category: 'desserts',
+    name: 'Gulab Jamun',
+    desc: 'Warm, golden milk-solid dumplings soaked in a delicate cardamom and rosewater syrup.',
+    price: 180,
+    img: '/assets/images/menu/gulab-jamun.png',
+  },
+  {
+    id: 'd2',
+    category: 'desserts',
+    name: 'Rasmalai',
+    desc: 'Spongy cottage cheese discs immersed in chilled, saffron-infused thickened milk, garnished with pistachios.',
+    price: 220,
+    badge: 'MUST TRY',
+    img: '/assets/images/menu/rasmalai.png',
+  },
+  {
+    id: 'd3',
+    category: 'desserts',
+    name: 'Ice Cream',
+    desc: 'Selection of artisanal ice creams. Ask your server for today\'s seasonal flavours.',
+    price: 150,
+    img: '/assets/images/menu/ice-cream.png',
+  },
+  {
+    id: 'd4',
+    category: 'desserts',
+    name: 'Brownie Sizzler',
+    desc: 'Fudge brownie served sizzling hot with a scoop of vanilla bean ice cream and molten dark chocolate sauce.',
+    price: 320,
+    img: '/assets/images/menu/brownie-sizzler.png',
+  },
+  {
+    id: 'd5',
+    category: 'desserts',
+    name: 'Moong Dal Halwa',
+    desc: 'Rich, slow-cooked dessert made from split yellow lentils, clarified butter, and roasted almonds.',
+    price: 240,
+    badge: 'WINTER SPECIAL',
+    img: '/assets/images/menu/moong-dal-halwa.png',
+  },
+];
