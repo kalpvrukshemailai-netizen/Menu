@@ -75,7 +75,7 @@ export const MENU_DATA = [
     name: 'Kadai Paneer',
     desc: 'Wok-tossed paneer with crunchy bell peppers and onions in a robust, freshly ground coriander-chili masala.',
     price: 440,
-    img: '/assets/images/menu/kadai-paneer.png',
+    img: '/assets/images/menu/kadai-sabzi.png',
   },
   {
     id: 'm4',
@@ -84,7 +84,7 @@ export const MENU_DATA = [
     desc: 'Melt-in-mouth dumplings of paneer and potato stuffed with dry fruits, served in a mild, sweet-savoury cashew sauce.',
     price: 460,
     badge: 'SIGNATURE',
-    img: '/assets/images/menu/malai-kofta.png',
+    img: '/assets/images/menu/shahi-kofta.png',
   },
   {
     id: 'm5',
@@ -92,7 +92,7 @@ export const MENU_DATA = [
     name: 'Mix Veg',
     desc: 'A vibrant medley of seasonal garden vegetables lightly spiced and sautéed home-style.',
     price: 360,
-    img: '/assets/images/menu/mix-veg.png',
+    img: '/assets/images/menu/navratan-korma.png',
   },
 
   // DESSERTS
@@ -119,7 +119,7 @@ export const MENU_DATA = [
     name: 'Ice Cream',
     desc: 'Selection of artisanal ice creams. Ask your server for today\'s seasonal flavours.',
     price: 150,
-    img: '/assets/images/menu/ice-cream.png',
+    img: '/assets/images/menu/chocolate-lava-cake.png',
   },
   {
     id: 'd4',
@@ -127,7 +127,7 @@ export const MENU_DATA = [
     name: 'Brownie Sizzler',
     desc: 'Fudge brownie served sizzling hot with a scoop of vanilla bean ice cream and molten dark chocolate sauce.',
     price: 320,
-    img: '/assets/images/menu/brownie-sizzler.png',
+    img: '/assets/images/menu/brownie-with-ice-cream.png',
   },
   {
     id: 'd5',
@@ -136,6 +136,6 @@ export const MENU_DATA = [
     desc: 'Rich, slow-cooked dessert made from split yellow lentils, clarified butter, and roasted almonds.',
     price: 240,
     badge: 'WINTER SPECIAL',
-    img: '/assets/images/menu/moong-dal-halwa.png',
+    img: '/assets/images/menu/moong-dal-veloute.png',
   },
 ];

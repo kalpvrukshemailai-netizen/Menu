@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import MenuExplorer from './components/MenuExplorer';
 import Checkout from './components/Checkout';
 import { CartProvider, useCart } from './context/CartContext';
-import { ShoppingBag, ChevronDown } from 'lucide-react';
+import { ShoppingBag, ChevronDown, Menu, Calendar } from 'lucide-react';
 
 const THEMES = [
   { id: 'dark', label: 'Dark Luxury', name: 'Maison', em: 'Élise', tagline: 'Fine Dining · Est. 2014' },
@@ -11,7 +11,7 @@ const THEMES = [
   { id: 'neon', label: 'Neon Cyberpunk', name: 'Neon', em: 'Bites', tagline: 'Cyber Lounge · 2077' },
 ];
 
-function Header({ currentView, setCurrentView, currentTheme, setCurrentTheme }) {
+function Header({ currentView, setCurrentView, currentTheme, setCurrentTheme, mobileLayout, setMobileLayout }) {
   const { totalItems } = useCart();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -49,6 +49,7 @@ function Header({ currentView, setCurrentView, currentTheme, setCurrentTheme }) 
           </button>
 
           <div className={`theme-dropdown ${dropdownOpen ? 'open' : ''}`}>
+            <p className="dropdown-section-label">🎨 Theme</p>
             {THEMES.map(theme => (
               <button
                 key={theme.id}
@@ -62,10 +63,24 @@ function Header({ currentView, setCurrentView, currentTheme, setCurrentTheme }) 
                 {theme.label}
               </button>
             ))}
+            <div className="dropdown-divider mobile-only" />
+            <p className="dropdown-section-label mobile-only">📱 Mobile Layout</p>
+            <button
+              className={`theme-option mobile-only ${mobileLayout === 'cards' ? 'active' : ''}`}
+              onClick={() => { setMobileLayout('cards'); setDropdownOpen(false); }}
+            >
+              ✦ Animated Menu Cards
+            </button>
+            <button
+              className={`theme-option mobile-only ${mobileLayout === 'gallery' ? 'active' : ''}`}
+              onClick={() => { setMobileLayout('gallery'); setDropdownOpen(false); }}
+            >
+              ⊞ 3D Swipe Gallery
+            </button>
           </div>
         </div>
 
-        {/* Center: Navigation Links */}
+        {/* Center: Navigation Links (Desktop) */}
         <nav className="header-nav">
           <a href="#menu-explorer" className="nav-link" onClick={() => setCurrentView('landing')}>Menu Explorer</a>
           <a href="#story" className="nav-link" onClick={() => setCurrentView('landing')}>Our Story</a>
@@ -75,12 +90,22 @@ function Header({ currentView, setCurrentView, currentTheme, setCurrentTheme }) 
         {/* Right: Actions */}
         <div className="header-actions">
           <button className="cta-btn">Book a Table</button>
+          
+          {/* Mobile specific actions */}
+          <button className="mobile-icon-btn mobile-only">
+            <Calendar size={22} />
+          </button>
+
           <button 
             className={`header-cart-btn ${totalItems > 0 ? 'has-items' : ''}`}
             onClick={() => setCurrentView(currentView === 'checkout' ? 'landing' : 'checkout')}
           >
             <ShoppingBag size={22} />
             {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
+          </button>
+          
+          <button className="mobile-icon-btn mobile-only">
+            <Menu size={24} />
           </button>
         </div>
       </div>
@@ -152,14 +177,20 @@ function Hero() {
       }, 600);
     };
 
-    wrap.addEventListener('mouseenter', handleEnter, { passive: true });
-    wrap.addEventListener('mousemove', handleMove, { passive: true });
-    wrap.addEventListener('mouseleave', handleLeave, { passive: true });
+    const isDesktop = window.matchMedia('(pointer: fine)').matches;
+    
+    if (isDesktop) {
+      wrap.addEventListener('mouseenter', handleEnter, { passive: true });
+      wrap.addEventListener('mousemove', handleMove, { passive: true });
+      wrap.addEventListener('mouseleave', handleLeave, { passive: true });
+    }
 
     return () => {
-      wrap.removeEventListener('mouseenter', handleEnter);
-      wrap.removeEventListener('mousemove', handleMove);
-      wrap.removeEventListener('mouseleave', handleLeave);
+      if (isDesktop) {
+        wrap.removeEventListener('mouseenter', handleEnter);
+        wrap.removeEventListener('mousemove', handleMove);
+        wrap.removeEventListener('mouseleave', handleLeave);
+      }
       levitationAnim.kill();
     };
   }, []);
@@ -256,11 +287,11 @@ function Footer({ activeThemeData }) {
   );
 }
 
-function LandingPage({ activeThemeData }) {
+function LandingPage({ activeThemeData, mobileLayout }) {
   return (
     <main>
       <Hero />
-      <MenuExplorer />
+      <MenuExplorer mobileLayout={mobileLayout} />
       <SignatureCarousel />
       <StorySection />
       <Footer activeThemeData={activeThemeData} />
@@ -269,8 +300,9 @@ function LandingPage({ activeThemeData }) {
 }
 
 function MainApp() {
-  const [currentView, setCurrentView] = useState('landing'); // 'landing' | 'checkout'
+  const [currentView, setCurrentView] = useState('landing');
   const [currentTheme, setCurrentTheme] = useState('dark');
+  const [mobileLayout, setMobileLayout] = useState('cards'); // 'cards' | 'gallery'
 
   useEffect(() => {
     document.body.dataset.theme = currentTheme;
@@ -285,10 +317,12 @@ function MainApp() {
         setCurrentView={setCurrentView} 
         currentTheme={currentTheme}
         setCurrentTheme={setCurrentTheme}
+        mobileLayout={mobileLayout}
+        setMobileLayout={setMobileLayout}
       />
       
       {currentView === 'landing' ? (
-        <LandingPage activeThemeData={activeThemeData} />
+        <LandingPage activeThemeData={activeThemeData} mobileLayout={mobileLayout} />
       ) : (
         <Checkout onBack={() => setCurrentView('landing')} />
       )}
