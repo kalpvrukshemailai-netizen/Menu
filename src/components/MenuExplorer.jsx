@@ -63,7 +63,7 @@ function MobileMenuCard({ item, index }) {
       <div className="mc-img-wrap">
         {item.modelUrl ? (
           <Canvas
-            camera={{ position: [0, 0.5, 4], fov: 50 }}
+            camera={{ position: [0, 1, 3], fov: 45 }}
             style={{ width: '100%', height: '100%', touchAction: 'pan-y' }}
           >
             <Suspense fallback={null}>
@@ -72,7 +72,7 @@ function MobileMenuCard({ item, index }) {
                   <FoodModel url={item.modelUrl} />
                 </Stage>
               </Float>
-              <OrbitControls autoRotate autoRotateSpeed={1.2} enableZoom={true} enablePan={true} />
+              <OrbitControls autoRotate autoRotateSpeed={1.2} enableZoom={true} enablePan={true} minPolarAngle={Math.PI / 4} maxPolarAngle={Math.PI / 2} />
             </Suspense>
           </Canvas>
         ) : item.img ? (
